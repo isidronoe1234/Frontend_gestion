@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg ">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Formatos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Convocatorias</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Covenios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="card-container">
+    <div class="card">
+      <div class="card-body">
+        <img class="logo" src="assets/compania-de-seguros.png">
+        <div class="mb-3">
+          <p class="card-title fw-bold">LOGIN</p>
+          <form [formGroup]="Formulario_login" (ngSubmit)="login()">
+
+            <label for=" exampleFormControlInput1" class="form-label">NUE:</label>
+            <input type="email" class="form-control" placeholder="EJEMPLO123" id="email" name="email"
+              formControlName="NUE">
+            <ng-container *ngFor="let validation of validationMessages.NUE">
+              <small
+                *ngIf="Formulario_login.get('NUE')?.hasError(validation.type) && (Formulario_login.get('NUE')?.dirty || Formulario_login.get('NUE')?.touched)">
+                <i class="fa fa-circle-exclamation"></i>{{validation.message}}
+              </small>
+            </ng-container>
+
+            <label for="exampleFormControlInput1" class="form-label">Contraseña:</label>
+            <input type="password" class="form-control" id="password" name="password" formControlName="password">
+            <ng-container *ngFor="let validation of validationMessages.password">
+              <small
+                *ngIf="Formulario_login.get('password')?.hasError(validation.type) && (Formulario_login.get('password')?.dirty || Formulario_login.get('password')?.touched)">
+                <i class="fa fa-circle-exclamation"></i>{{validation.message}}
+              </small>
+            </ng-container>
+
+            <br>
+            <button class="boton-login btn">Iniciar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

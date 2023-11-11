@@ -1,0 +1,63 @@
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+
+}
+
+.card {
+    text-align: center;
+    color: white;
+    width: 350px;
+    height: auto;
+    border-radius: 15px;
+    background-color: #2f3030;
+    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card small {
+    text-align: left; /* O la alineación deseada, como 'right' o 'justify' */
+    display: block;   /* Esto asegura que cada small esté en una nueva línea */
+    margin-top: 5px;   /* Ajusta el margen superior según sea necesario */
+}
+
+.card label {
+    margin-top: 20px;
+    display: block;
+    text-align: left;
+}
+
+.boton-login {
+    margin-top: 20px;
+    
+    border: 2px solid #5f8e7a;
+    color: white;
+}
+
+.boton-login:hover{
+  background-color: #588e77;
+}
+
+.card-title{
+    font-size: 30px;
+    
+}
+
+.logo{
+    width: 20%;
+}
+
+  nav,a{
+    background-color: #131925;
+    color: #fff;
+  }
+
+
+small{
+    color: rgb(255, 125, 125);
+}
+
+i{
+    margin-right: 3px;
+}
