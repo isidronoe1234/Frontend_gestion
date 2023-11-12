@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
       const isAuthenticated = this.service.isAuthenticated(); 
       const userData = JSON.parse(localStorage.getItem('user') || 'null') || null;
       const userRole = userData.id_rol;
-      const allowedAdminRoutes = ['/admin-home', '/admin-route1', '/admin-route2'];
+      const allowedAdminRoutes = ['/admin-home'];
       const allowedUserRoutes = ['/user-home'];
     
       if (isAuthenticated) {     
@@ -30,8 +30,6 @@ export class AuthGuard implements CanActivate {
           
         }
       }
-
-      // El usuario no está autenticado, redirige al usuario a la página de inicio de sesión
-      return this.router.parseUrl('/login'); // Cambia '/login' por la ruta de inicio de sesión
+      return this.router.parseUrl('/home-principal');
    }
 }

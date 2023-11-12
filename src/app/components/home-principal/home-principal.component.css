@@ -1,0 +1,28 @@
+nav,
+a {
+    background-color: #131925;
+    color: #fff;
+}
+
+
+.btn-formatos,
+.btn-convocatorias,
+.btn-convenios,
+.btn-login {
+    color: #fff;
+}
+
+.btn-formatos-seleccionado,
+.btn-convocatorias-seleccionado,
+.btn-convenios-seleccionado,
+.btn-login-seleccionado {
+    background-color: rgba(62, 79, 116, 0.534);
+    color: #fff;
+}
+
+.btn-formatos:hover,
+.btn-convocatorias:hover,
+.btn-convenios:hover,
+.btn-login:hover {
+    border: 1px solid rgba(81, 103, 151, 0.808);
+}

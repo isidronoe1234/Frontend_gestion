@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Proyecto</a>
+            <button class="btn navbar-toggler"  data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars" style="color: #ffffff;"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <button class="btn m-1" [class.btn-formatos]="pestanaSeleccionada !== 'formatos'"
+                            [class.btn-formatos-seleccionado]="pestanaSeleccionada === 'formatos'"
+                            (click)="seleccionarPestana('formatos'); cerrarMenu()">
+                            Formatos
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn m-1" [class.btn-convocatorias]="pestanaSeleccionada !== 'convocatorias'"
+                            [class.btn-convocatorias-seleccionado]="pestanaSeleccionada === 'convocatorias'"
+                            (click)="seleccionarPestana('convocatorias'); cerrarMenu()">
+                            Convocatorias
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn m-1" [class.btn-convenios]="pestanaSeleccionada !== 'convenios'"
+                            [class.btn-convenios-seleccionado]="pestanaSeleccionada === 'convenios'"
+                            (click)="seleccionarPestana('convenios'); cerrarMenu()">
+                            Convenios
+                        </button>
+                    </li>
+                    <li class="nav-item ">
+                        <button class="btn m-1" [class.btn-login]="pestanaSeleccionada !== 'login'"
+                            [class.btn-login-seleccionado]="pestanaSeleccionada === 'login'"
+                            (click)="seleccionarPestana('login'); cerrarMenu()">
+                            Iniciar Sesión
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+
+    <div class="tabs" style="margin-top: 1%;">
+        <div *ngIf="pestanaSeleccionada === 'formatos'">
+            <app-formatos></app-formatos>
+        </div>
+        <div *ngIf="pestanaSeleccionada === 'convocatorias'">
+            <app-convocatorias></app-convocatorias>
+        </div>
+        <div *ngIf="pestanaSeleccionada === 'convenios'">
+            <app-convenios></app-convenios>
+        </div>
+        <div *ngIf="pestanaSeleccionada === 'login'">
+            <app-login></app-login>
+        </div>
+    </div>
+</body>
+
+</html>
