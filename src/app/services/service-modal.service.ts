@@ -5,5 +5,5 @@ import { Injectable } from '@angular/core';
 })
 export class ServiceModalService {
 
-  constructor(private modalService: NgbModal) { }
+  constructor() { }
 }
