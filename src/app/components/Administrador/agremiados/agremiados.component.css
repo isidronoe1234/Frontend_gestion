@@ -1,0 +1,99 @@
+.titulo-principal {
+    font-size: 35px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+body{
+    background-color: transparent
+}
+
+.boton-ver,
+.boton-modificar{
+   margin-right: 5px;
+}
+
+.boton-ver {
+    background-color: #09d;
+    color: #fff;
+}
+
+.boton-ver:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.341);
+}
+
+.boton-modificar, .boton-eliminar {
+    background-color: #838383;
+    color: #fff;
+}
+
+.boton-modificar:hover,
+.boton-eliminar:hover,
+.boton-agregar:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.341);
+}
+
+
+.boton-agregar {
+    background-color: #679289;
+    color: #fff;
+
+}
+
+.div-btn-agregar {
+    margin-bottom: 1%;
+}
+
+.boton-salir {
+    background-color: #e03625;
+    color: #fff;
+}
+
+.boton-salir:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.341);
+}
+
+.opciones {
+    text-align: center;
+}
+
+.opciones-botones {
+    position: relative;
+    text-align: center;
+}
+
+tbody tr:hover {
+    background-color: #b3efb2a4;
+    cursor: pointer;
+}
+
+table th{
+    background-color: #232d40c3;
+    color: #fff;
+}
+
+
+
+.row{
+    margin-bottom: 10px;
+}
+
+.form-label{
+    font-weight: bold;
+}
+
+.modal-header{
+    background-color: #679289;
+    color: white;
+}
+
+.input-cuota{
+    margin-top: 25px;
+}
+
+small{
+    color: red;
+}
+
+i{
+    margin-right: 3px;
+}

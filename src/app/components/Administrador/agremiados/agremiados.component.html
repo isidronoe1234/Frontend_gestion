@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="agremiados.component.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+
+<header>
+
+    <div class="col-sm-12">
+        <div class="d-flex align-items-center justify-content-between">
+            <h4 class="titulo-principal">PANEL DE AGREMIADOS</h4>
+        </div>
+    </div>
+    <hr>
+</header>
+
+<div class="div-btn-agregar">
+    <button (click)="openNewCategoryModal()" class="btn boton-agregar"><i
+            class="fa fa-user-plus"></i> Agregar agremiado</button>
+            
+</div>
+
+<body>
+    <div class="table-responsive">
+        <table  id="table-data-administradores" class="table">
+            <thead >
+                <tr >
+                    <th scope="col">#</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Nombre(s)</th>
+                    <th scope="col">Sexo</th>
+                    <th scope="col">NUP</th>
+                    <th scope="col">NUE</th>
+                    <th scope="col">RFC</th>
+                    <th scope="col">NSS</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Cuota</th>
+                    <th scope="col" class="opciones">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of agremiados; let i=index ">
+                    <td scope="row" align="center">{{i+1}}</td>
+                    <td>{{item.a_paterno}} {{item.a_materno}}</td>
+                    <td>{{item.nombre}}</td>
+                    <td>{{item.sexo}}</td>
+                    <td>{{item.NUP}}</td>
+                    <td>{{item.NUE}}</td>
+                    <td>{{item.RFC}}</td>
+                    <td>{{item.NSS}}</td>
+                    <td>{{item.telefono}}</td>
+                    <td align="center">{{item.cuota === 1 ? 'Sí':'No'}}</td>
+                    <td class="opciones-botones">
+                        <button (click)="update_agremiado(item.id)" title="Modificar agremiado" type="button"
+                            class="btn btn-sm boton-modificar"><i class="fa-regular fa-pen-to-square"></i></button> 
+                         <button (click)="delete_agremiado(item.id)" title="Inhabilitar agremiado" type="button"
+                            class="btn btn-sm boton-eliminar"><i class="fa-regular fa-trash-can"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <form [formGroup]="Formulario_add_agremiado" (ngSubmit)="add_agremiado()">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Agregar agremiado</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <label class="form-label">Nombre(s)</label>
+                            <input type="text" class="form-control" formControlName="nombre" placeholder="First name"
+                                aria-label="First name">
+                            <div *ngFor="let validacion of Mensajes_validaciones.nombre">
+                                <small
+                                    *ngIf="Formulario_add_agremiado.get('nombre')?.hasError(validacion.type) && (Formulario_add_agremiado.get('nombre')?.dirty || Formulario_add_agremiado.get('nombre')?.touched)">
+                                    <i class="fa fa-circle-exclamation"></i>{{validacion.message}}
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <label class="form-label">Apellido paterno</label>
+                            <input type="text" class="form-control" formControlName="a_paterno" placeholder="Last name"
+                                aria-label="Last name">
+                            <div *ngFor="let validacion of Mensajes_validaciones.a_paterno">
+                                <small
+                                    *ngIf="Formulario_add_agremiado.get('a_paterno')?.hasError(validacion.type) && (Formulario_add_agremiado.get('a_paterno')?.dirty || Formulario_add_agremiado.get('a_paterno')?.touched)">
+                                    <i class="fa fa-circle-exclamation"></i>{{validacion.message}}
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <label class="form-label">Apellido materno</label>
+                            <input type="text" class="form-control" formControlName="a_materno" placeholder="Last name"
+                                aria-label="Last name">
+                            <div *ngFor="let validacion of Mensajes_validaciones.a_materno">
+                                <small
+                                    *ngIf="Formulario_add_agremiado.get('a_materno')?.hasError(validacion.type) && (Formulario_add_agremiado.get('a_materno')?.dirty || Formulario_add_agremiado.get('a_materno')?.touched)">
+                                    <i class="fa fa-circle-exclamation"></i>{{validacion.message}}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label class="form-label">Genero</label>
+                            <select class="form-select" aria-label="Default select example" formControlName="sexo">
+                                <option value="">Seleccionar</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Otro">Otro</option>
+                                <option value="Prefiero no decirlo">Prefiero no decirlo</option>
+                            </select>
+                            <div *ngFor="let validacion of Mensajes_validaciones.sexo">
+                                <small
+                                    *ngIf="Formulario_add_agremiado.get('sexo')?.hasError(validacion.type) && (Formulario_add_agremiado.get('sexo')?.dirty || Formulario_add_agremiado.get('sexo')?.touched)">
+                                    <i class="fa fa-circle-exclamation"></i>{{validacion.message}}
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <label class="form-label">Teléfono</label>
+                            <input type="text" class="form-control" formControlName="telefono" placeholder="Last name"
+                                aria-label="Last name">
+                            <div *ngFor="let validacion of Mensajes_validaciones.telefono">
+                                <small
+                                    *ngIf="Formulario_add_agremiado.get('telefono')?.hasError(validacion.type) && (Formulario_add_agremiado.get('telefono')?.dirty || Formulario_add_agremiado.get('telefono')?.touched)">
+                                    <i class="fa fa-circle-exclamation"></i>{{validacion.message}}
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <label class="form-label">Fecha de nacimiento</label>
+                            <input type="date" class="form-control" formControlName="f_nacimiento"
+                                placeholder="Last name" aria-label="Last name">
+                            <div *ngFor="let validacion of Mensajes_validaciones.f_nacimiento">
+                                <small
+                                    *ngIf="Formulario_add_agremiado.get('f_nacimiento')?.hasError(validacion.type) && (Formulario_add_agremiado.get('f_nacimiento')?.dirty || Formulario_add_agremiado.get('f_nacimiento')?.touched)">
+                                    <i class="fa fa-circle-exclamation"></i>{{validacion.message}}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label class="form-label">NUE</label>
+                            <input type="text" class="form-control" formControlName="NUE" placeholder="First name"
+                                aria-label="First name">
+                            <div *ngFor="let validacion of Mensajes_validaciones.NUE">
+                                <small
+                                    *ngIf="Formulario_add_agremiado.get('NUE')?.hasError(validacion.type) && (Formulario_add_agremiado.get('NUE')?.dirty || Formulario_add_agremiado.get('NUE')?.touched)">
+                                    <i class="fa fa-circle-exclamation"></i>{{validacion.message}}
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <label class="form-label">NUP</label>
+                            <input type="text" class="form-control" formControlName="NUP" placeholder="Last name"
+                                aria-label="Last name">
+                            <div *ngFor="let validacion of Mensajes_validaciones.NUP">
+                                <small
+                                    *ngIf="Formulario_add_agremiado.get('NUP')?.hasError(validacion.type) && (Formulario_add_agremiado.get('NUP')?.dirty || Formulario_add_agremiado.get('NUP')?.touched)">
+                                    <i class="fa fa-circle-exclamation"></i>{{validacion.message}}
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <label class="form-label">NSS</label>
+                            <input type="text" class="form-control" formControlName="NSS" placeholder="Last name"
+                                aria-label="Last name">
+                            <div *ngFor="let validacion of Mensajes_validaciones.NSS">
+                                <small
+                                    *ngIf="Formulario_add_agremiado.get('NSS')?.hasError(validacion.type) && (Formulario_add_agremiado.get('NSS')?.dirty || Formulario_add_agremiado.get('NSS')?.touched)">
+                                    <i class="fa fa-circle-exclamation"></i>{{validacion.message}}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <label class="form-label">RFC</label>
+                            <input type="text" class="form-control" formControlName="RFC" placeholder="First name"
+                                aria-label="First name">
+                            <div *ngFor="let validacion of Mensajes_validaciones.RFC">
+                                <small
+                                    *ngIf="Formulario_add_agremiado.get('RFC')?.hasError(validacion.type) && (Formulario_add_agremiado.get('RFC')?.dirty || Formulario_add_agremiado.get('RFC')?.touched)">
+                                    <i class="fa fa-circle-exclamation"></i>{{validacion.message}}
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">¿Paga cuota?</label>
+                            <div class="">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                        id="inlineRadio1" value=1 formControlName="cuota">
+                                    <label class="form-check-label" for="inlineRadio1">Sí</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                        id="inlineRadio2" value=0 formControlName="cuota">
+                                    <label class="form-check-label" for="inlineRadio2">No</label>
+                                </div>
+                                <div *ngFor="let validacion of Mensajes_validaciones.cuota">
+                                    <small
+                                        *ngIf="Formulario_add_agremiado.get('cuota')?.hasError(validacion.type) && (Formulario_add_agremiado.get('cuota')?.dirty || Formulario_add_agremiado.get('cuota')?.touched)">
+                                        <i class="fa fa-circle-exclamation"></i>{{validacion.message}}
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer align-items-center">
+                    <button type="submit" class="btn btn-secondary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</html>

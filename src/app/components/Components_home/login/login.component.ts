@@ -2,6 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ServicesService } from '../../../services/services.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +12,9 @@ import { Router } from '@angular/router';
 export class LoginComponent {
 
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private service: ServicesService,
-    private router: Router){}
+    private router: Router) { }
 
   Formulario_login: FormGroup = this.fb.group({
     NUE: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10), Validators.pattern("[a-zA-Z0-9]+")]],
@@ -28,27 +29,44 @@ export class LoginComponent {
       { type: 'minlength', message: 'El campo debe tener un minimo de 10 caracteres' },
       { type: 'pattern', message: 'El campo debe solo contener letras y/o números' },
     ],
-    password:[
-      {type: 'required', message:'El campo es requerido'}
+    password: [
+      { type: 'required', message: 'El campo es requerido' }
     ]
   };
 
-  login(){
+  login() {
     if (this.Formulario_login.invalid) {
       this.Formulario_login.markAllAsTouched();
       return;
     }
-    this.service.login(this.Formulario_login.value).subscribe((data:any)=>{
+    this.service.login(this.Formulario_login.value).subscribe((data: any) => {
       this.service.guardar_user(data);
-      const rolUser=data.id_rol;
-      if(rolUser===1){
-        this.router.navigate(['/admin-home']);
-      }else if(rolUser===2){
-        this.router.navigate(['/user-home']);
-      }
-    },(error)=>{
-      console.log('No autorizado');
-      
+      const rolUser = data.id_rol;
+      Swal.fire({
+        title: '¡Bienvenido!',
+        text: 'Se iniciado sesión correctamente',
+        icon: 'success',
+        timer: 2000,
+        showConfirmButton: false
+      });
+
+      setTimeout(() => {
+        if (rolUser === 1) {
+          this.router.navigate(['/list-agremiados']);
+        } else if (rolUser === 2) {
+          this.router.navigate(['/user-home']);
+        }
+      }, 2000);
+
+
+    }, (error) => {
+      Swal.fire({
+        title: 'Credenciales incorrectas',
+        text: 'Tu NUE y/o constraseñas son incorrectas',
+        icon: 'error',
+        showConfirmButton: true
+      });
+
     })
   }
 

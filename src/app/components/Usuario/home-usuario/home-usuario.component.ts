@@ -50,7 +50,6 @@ export class HomeUsuarioComponent {
   getSolicitudes() {
     this.service.getSolicitudes().subscribe((data: any) => {
       this.solicitudes = data;
-      console.log(data);
 
     })
   }

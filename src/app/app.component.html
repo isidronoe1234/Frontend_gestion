@@ -1,1 +1,10 @@
-<router-outlet></router-outlet>
+<div *ngIf="!isExcludedRoute(); else contenidoAlternativo">
+
+  <app-sidenav (onToggleSideNav)="onToggleSideNav($event)"></app-sidenav>
+  <app-body [collapsed]="isSideNavCollapsed" [screenWidth]="screenWidth">
+  </app-body>
+</div>
+
+<ng-template #contenidoAlternativo>
+  <router-outlet></router-outlet>
+</ng-template>

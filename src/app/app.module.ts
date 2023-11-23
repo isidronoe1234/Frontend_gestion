@@ -7,11 +7,18 @@ import { LoginComponent } from './components/Components_home/login/login.compone
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeUsuarioComponent } from './components/Usuario/home-usuario/home-usuario.component';
-import { HomeAdminComponent } from './components/Administrador/home-admin/home-admin.component';
 import { HomePrincipalComponent } from './components/home-principal/home-principal.component';
 import { ConvocatoriasComponent } from './components/Components_home/convocatorias/convocatorias.component';
 import { ConveniosComponent } from './components/Components_home/convenios/convenios.component';
 import { FormatosComponent } from './components/Components_home/formatos/formatos.component';
+import { BodyComponent } from './components/Sidebar/body/body.component';
+import { SidenavComponent } from './components/Sidebar/sidenav/sidenav.component';
+import { AgremiadosComponent } from './components/Administrador/agremiados/agremiados.component';
+import { ModalNewAgremiadoComponent } from './components/Modals/modal-new-agremiado/modal-new-agremiado.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SolicitudesComponent } from './components/Administrador/solicitudes/solicitudes.component';
+import { AgremiadosArchivadosComponent } from './components/Administrador/agremiados-archivados/agremiados-archivados.component';
+import { DataTablesModule } from 'angular-datatables';
 
 
 
@@ -20,11 +27,17 @@ import { FormatosComponent } from './components/Components_home/formatos/formato
     AppComponent,
     LoginComponent,
     HomeUsuarioComponent,
-    HomeAdminComponent,
     HomePrincipalComponent,
     ConvocatoriasComponent,
     ConveniosComponent,
-    FormatosComponent
+    FormatosComponent,
+    BodyComponent,
+    SidenavComponent,
+    AgremiadosComponent,
+    ModalNewAgremiadoComponent,
+    SolicitudesComponent,
+    AgremiadosArchivadosComponent,
+
 
   ],
   imports: [
@@ -32,7 +45,8 @@ import { FormatosComponent } from './components/Components_home/formatos/formato
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    DataTablesModule,
     
   ],
   providers: [],

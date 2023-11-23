@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ServicesService {
 
-  ruta_archivos: string='sKgnJrNIUq47zuAh2Uq15BrHsOVcR8W3yPF8ZUng.pdf'
+  getNewAgremiado: EventEmitter<any>= new EventEmitter();
 
   constructor(private http: HttpClient) {
 
@@ -23,7 +23,12 @@ export class ServicesService {
 
   isAuthenticated() {
     const user = localStorage.getItem('user'); // Obtén el usuario desde el almacenamiento local
-    return !!user; // Devuelve true si el usuario está autenticado
+    return JSON.parse(user || 'null') || null;
+  }
+
+  getUserDataFromLocalStorage(): any {
+    const userDataString = localStorage.getItem('user');
+   
   }
 
 
@@ -37,14 +42,20 @@ export class ServicesService {
     return this.http.get(`http://localhost:8000/api/Solicitud/${userNUE}`);
   }
 
-
-  // dowlandArchivo(ruta_archivo:any){
-
-  //   return this.http.get(`http://localhost:8000/api/dowlandArchivo/${ruta_archivo}`);
-  // }
-
   dowlandArchivo(rutaArchivo: string): Observable<ArrayBuffer> {
     const url = `http://localhost:8000/api/dowlandArchivo/${rutaArchivo}`;
     return this.http.get(url, { responseType: 'arraybuffer' });
+  }
+
+  getAgremiados(){
+    return this.http.get(`http://localhost:8000/api/Agremiados`);
+  }
+
+  newAgremiado(data:any){
+    return this.http.post(`http://localhost:8000/api/newAgremiado`,data);
+  }
+
+  setNewAgremiado(agremiado:any){
+    this.getNewAgremiado.emit(agremiado);
   }
 }
