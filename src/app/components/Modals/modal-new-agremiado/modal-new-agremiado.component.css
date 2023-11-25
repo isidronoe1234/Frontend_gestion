@@ -1,0 +1,24 @@
+.row{
+    margin-bottom: 10px;
+}
+
+.form-label{
+    font-weight: bold;
+}
+
+.modal-header{
+    background-color: #679289;
+    color: white;
+}
+
+.input-cuota{
+    margin-top: 25px;
+}
+
+small{
+    color: red;
+}
+
+i{
+    margin-right: 3px;
+}

@@ -61,7 +61,7 @@ body{
     text-align: center;
 }
 
-tbody tr:hover {
+/* tbody tr:hover {
     background-color: #b3efb2a4;
     cursor: pointer;
 }
@@ -69,8 +69,21 @@ tbody tr:hover {
 table th{
     background-color: #232d40c3;
     color: #fff;
+} */
+
+.table-hove tbody tr:hover {
+    background-color: #dedede;
+    cursor: pointer;
 }
 
+table thead {
+    background-color: #232d40c3;
+    color: #fff;
+}
+
+table tbody {
+    background-color: #fff;
+}
 
 
 .row{
@@ -96,4 +109,13 @@ small{
 
 i{
     margin-right: 3px;
+}
+
+.table-responsive{
+    padding: 4px;
+}
+
+.table-responsive .btn{
+    padding: 5px 10px;
+    margin: 10px 3px 10px 0;
 }

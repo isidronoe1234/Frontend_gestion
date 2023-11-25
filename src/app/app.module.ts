@@ -18,7 +18,7 @@ import { ModalNewAgremiadoComponent } from './components/Modals/modal-new-agremi
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SolicitudesComponent } from './components/Administrador/solicitudes/solicitudes.component';
 import { AgremiadosArchivadosComponent } from './components/Administrador/agremiados-archivados/agremiados-archivados.component';
-import { DataTablesModule } from 'angular-datatables';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -46,7 +46,7 @@ import { DataTablesModule } from 'angular-datatables';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    DataTablesModule,
+    NgbModule
     
   ],
   providers: [],

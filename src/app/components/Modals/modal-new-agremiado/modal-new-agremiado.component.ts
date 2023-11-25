@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ServiceAlertasService } from 'src/app/services/service-alertas.service';
+import { ServiceModalService } from 'src/app/services/service-modal.service';
 import { ServicesService } from 'src/app/services/services.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { ServicesService } from 'src/app/services/services.service';
 export class ModalNewAgremiadoComponent {
 
 
-  constructor(private service: ServicesService, private fb: FormBuilder, private alertService: ServiceAlertasService, ) {
+  constructor(private service: ServicesService, private fb: FormBuilder, private alertService: ServiceAlertasService, private modalService:ServiceModalService) {
 }
 
   sololetras = '^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$';
@@ -102,6 +103,7 @@ export class ModalNewAgremiadoComponent {
     console.log(this.Formulario_add_agremiado.value);
     this.service.newAgremiado(this.Formulario_add_agremiado.value).subscribe((data: any) => {
       this.service.setNewAgremiado(data);
+      this.Formulario_add_agremiado.reset();
       this.alertService.generateAlert({
         title: 'Operación exitosa', text: 'Se ha registrado correctamente el usuario', icon: 'success', showConfirmButton: true
       }
@@ -115,5 +117,7 @@ export class ModalNewAgremiadoComponent {
     })
   }
 
-
+  cerrarModal(){
+    this.modalService.closeModal();
+  }
 }
