@@ -28,6 +28,6 @@ export class AppComponent {
 
   isExcludedRoute(): boolean {
     const currentRoute = this.router.url; 
-    return currentRoute === '/home-principal'; 
+    return currentRoute === '/home-principal' ||  currentRoute === '/user-home'; 
   }
 }

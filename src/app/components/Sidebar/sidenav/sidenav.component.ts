@@ -2,7 +2,7 @@ import { Component, EventEmitter, HostListener, OnInit, Output } from '@angular/
 import { navbarData } from './nav-data';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { ServicesService } from 'src/app/services/services.service';
+import { ServiceLoginService } from 'src/app/services/service-login.service';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -26,11 +26,11 @@ export class SidenavComponent {
   id: any;
   foto_perfil: any = "";
   showSidenav: boolean = false;
-  isAuthenticated:any=[];
-  userRole:any=[];
+  isAuthenticated: any = [];
+  userRole: any = [];
 
 
-  constructor(private router: Router, private service: ServicesService) {
+  constructor(private router: Router, private loginService: ServiceLoginService) {
     this.mostrarSidenav();
   }
 
@@ -91,19 +91,19 @@ export class SidenavComponent {
   }
 
   async mostrarSidenav() {
-
     try {
-      this.isAuthenticated = await this.service.isAuthenticated();
+      this.isAuthenticated = await this.loginService.isAuthenticated();
       this.userRole = this.isAuthenticated.id_rol;
       console.log(this.userRole);
-      if (this.isAuthenticated && this.userRole === '1') {
+      if (this.isAuthenticated && this.userRole === 1) {
         this.showSidenav = true;
       } else {
         this.showSidenav = false;
       }
-    } catch {
 
+    } catch (error) {
+      console.error('Error al verificar la autenticación:', error);
     }
-
   }
+
 }

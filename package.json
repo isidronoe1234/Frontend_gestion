@@ -23,7 +23,6 @@
     "angular-datatables": "^16.0.1",
     "datatables.net-bs5": "^1.11.3",
     "file-saver": "^2.0.5",
-    "ngx-bootstrap": "^11.0.2",
     "ngx-image-compress": "^15.1.6",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.9.0",

@@ -19,15 +19,21 @@
     <hr>
 </header>
 
-<div class="div-btn-agregar">
-    <button (click)="openNewCategoryModal()" class="btn boton-agregar"><i class="fa fa-user-plus"></i> Agregar
-        agremiado</button>
 
+<div *ngIf="loading" class="loading-overlay">
+    <div class="loading-message">Cargando datos...</div>
+    <div class="lds-dual-ring"></div>
 </div>
 
-<body>
+<body *ngIf="!loading">
+    <div class="div-btn-agregar">
+        <button (click)="openNewCategoryModal()" class="btn boton-agregar"><i class="fa fa-user-plus"></i> Agregar
+            agremiado</button>
+
+    </div>
+
     <div class="table-responsive">
-        <table id="table-data-agremiados" class="table table-bordered table-hove table-striped">
+        <table id="table-data-agremiados" class="table table-hove table-striped">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -56,9 +62,9 @@
                     <td>{{item.telefono}}</td>
                     <td align="center">{{item.cuota === 1 ? 'Sí':'No'}}</td>
                     <td class="opciones-botones">
-                        <button (click)="update_agremiado(item.id)" title="Modificar agremiado" type="button"
+                        <button (click)="update_agremiado(item)" title="Modificar agremiado" type="button"
                             class="btn btn-sm boton-modificar"><i class="fa-regular fa-pen-to-square"></i></button>
-                        <button (click)="delete_agremiado(item.id)" title="Inhabilitar agremiado" type="button"
+                        <button (click)="desactivar_agremiado(item.id)" title="Inhabilitar agremiado" type="button"
                             class="btn btn-sm boton-eliminar"><i class="fa-regular fa-trash-can"></i></button>
                     </td>
                 </tr>

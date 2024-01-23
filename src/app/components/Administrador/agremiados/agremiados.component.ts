@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ServiceAlertasService } from 'src/app/services/service-alertas.service';
-import { ServicesService } from 'src/app/services/services.service';
-import { ModalNewAgremiadoComponent } from '../../Modals/modal-new-agremiado/modal-new-agremiado.component';
-import { Subject } from 'rxjs';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ServiceModalService } from 'src/app/services/service-modal.service';
+import Swal from 'sweetalert2';
+import { ServiceAgremiadoService } from 'src/app/services/service-agremiado.service';
 
 declare var $: any;
 @Component({
@@ -16,17 +13,39 @@ declare var $: any;
 export class AgremiadosComponent {
 
   agremiados: any[] = [];
+  dtInstance: any;
+  loading: boolean = true;
 
-  modalRef!: BsModalRef;
 
-  constructor(private service: ServicesService, private modalService: ServiceModalService) {
+  constructor(
+    private agremiadoservice: ServiceAgremiadoService,
+    private modalService: ServiceModalService,
+    private alertService: ServiceAlertasService,
+    private cdr: ChangeDetectorRef) {
 
-    this.service.getNewAgremiado.subscribe(agremiado => {
+    this.agremiadoservice.getNewAgremiado.subscribe(agremiado => {
       if (agremiado) {
         this.agremiados.push(agremiado);
         this.getAgremiados();
       }
-    })
+    });
+
+
+    this.agremiadoservice.editarAgremiado.subscribe(agremiado => {
+      console.log(agremiado);
+      if (agremiado) {
+        this.getAgremiados();
+      }
+    });
+
+
+    this.agremiadoservice.deleteAgremiado.subscribe((id: number) => {
+      if (id) {
+        this.agremiados = this.agremiados.filter(u => u.id !== id);
+
+        this.getAgremiados();
+      }
+    });
   }
 
 
@@ -41,7 +60,8 @@ export class AgremiadosComponent {
   }
 
   getAgremiados(): void {
-    this.service.getAgremiados().subscribe((data: any) => {
+    this.loading = true;
+    this.agremiadoservice.getAgremiados().subscribe((data: any) => {
       this.agremiados = data;
       this.agremiados.reverse();
       $('#table-data-agremiados').DataTable().destroy();
@@ -55,30 +75,85 @@ export class AgremiadosComponent {
           processing: true,
           lengthMenu: [5, 10, 25],
           responsive: true,
-          // dom: 'lBfrtip',
-          // buttons: [
-          //   {
-          //     extend: 'print',
-          //     text: '<i class="fa-solid fa-print"></i> Imprimir',
-          //   }
-          // ],
+          dom: 'lBfrtip',
+          buttons: [
+            {
+              extend: 'print',
+              text: '<i class="fa-solid fa-print"></i> Imprimir',
+              exportOptions: {
+                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+                
+              },
+              className: 'btn-primary'
+            },
+            {
+              extend: 'pdf',
+              text: '<i class="fa-solid fa-file-pdf"></i> PDF',
+              exportOptions: {
+                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+              },
+              className: 'btn-danger'
+            },
+            {
+              extend: 'excel',
+              text: '<i class="fa-solid fa-file-excel"></i> Excel',
+              exportOptions: {
+                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+              },
+              className: 'btn-success'
+            },
+          ],
+          title: 'Título personalizado para imprimir',
+          initComplete: function () {
+            $('.dataTables_filter').addClass('float-start').css('margin-top', '1%');
+            $('.form-control-sm').css('width', '400px');
+            $('.dt-buttons, .buttons-print, .buttons-pdf, .buttons-excel')
+              .addClass('float-end')
+              .css({ 'margin-bottom': '1%', 'margin-right': '5px', 'border-radius': '5px', 'color': 'white' });
+            $('.dataTables_info').addClass('float-start');
+            $('.pagination').addClass('float-end');
+          }
 
         });
-        table.buttons().container()
-          .appendTo('#table-data-agremiados_wrapper .col-md-6:eq(0)');
       });
     }, (error) => {
       console.log(error);
+    },
+      () => {
+        this.loading = false;
+      }
+    );
+  }
+
+
+  update_agremiado(item: any) {
+    this.modalService.openModalEditAgremiado(item);
+  }
+
+  desactivar_agremiado(id: number) {
+    Swal.fire({
+      title: '¿Quieres inhabilitar esté agremiado?',
+      text: 'Podras habilitarlo nuevamente si asi es necesario',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.agremiadoservice.desactivarAgremiado(id).subscribe((data: any) => {
+          this.agremiadoservice.getDeleteAgremiado(id);
+          this.alertService.generateAlert({
+            title: 'Operación exitosa', text: 'Se ha inhabilitado el usuario', icon: 'success', showConfirmButton: true
+          })
+        }, (error) => {
+          this.alertService.generateAlert({
+            title: 'Fallo en la operación', text: 'Ha ocurrido un error al inhabilitar al usuario', icon: 'error', showConfirmButton: true
+          })
+        })
+      }
     });
-  }
-
-
-
-  update_agremiado(id: number) {
-
-  }
-
-  delete_agremiado(id: number) {
 
   }
 
@@ -87,7 +162,18 @@ export class AgremiadosComponent {
   }
 
   openNewCategoryModal() {
-    this.modalService.openModal();
+    this.modalService.openModalNewAgremiado();
+  }
+
+  eliminarAgremiado(id: number) {
+    // Encuentra el índice del agremiado en el array
+    const index = this.agremiados.findIndex(agremiado => agremiado.id === id);
+
+    // Si se encuentra, elimínalo del array
+    if (index !== -1) {
+      this.agremiados.splice(index, 1);
+      this.getAgremiados();
+    }
   }
 
 }

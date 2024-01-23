@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ServiceAgremiadoService } from 'src/app/services/service-agremiado.service';
 import { ServiceAlertasService } from 'src/app/services/service-alertas.service';
 import { ServiceModalService } from 'src/app/services/service-modal.service';
-import { ServicesService } from 'src/app/services/services.service';
 
 @Component({
   selector: 'app-modal-new-agremiado',
@@ -13,17 +12,18 @@ import { ServicesService } from 'src/app/services/services.service';
 export class ModalNewAgremiadoComponent {
 
 
-  constructor(private service: ServicesService, private fb: FormBuilder, private alertService: ServiceAlertasService, private modalService:ServiceModalService) {
+  constructor(private agremiadoservice: ServiceAgremiadoService, private fb: FormBuilder, private alertService: ServiceAlertasService, private modalService:ServiceModalService) {
 }
 
   sololetras = '^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$';
   sololetras_y_numeros = '^[a-zA-Z0-9]+$';
   solonumeros = '^[0-9]+$';
+  sololetrasConEspacio = '^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(?: [a-zA-ZáéíóúÁÉÍÓÚñÑ]+)?$';
 
   Formulario_add_agremiado: FormGroup = this.fb.group({
     a_paterno: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15), Validators.pattern(this.sololetras)]],
     a_materno: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15), Validators.pattern(this.sololetras)]],
-    nombre: ['', [Validators.required, Validators.min(3), Validators.maxLength(20), Validators.pattern(this.sololetras)]],
+    nombre: ['', [Validators.required, Validators.min(3), Validators.maxLength(20), Validators.pattern(this.sololetrasConEspacio)]],
     sexo: ['', [Validators.required]],
     NUP: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(this.sololetras_y_numeros)]],
     NUE: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(this.sololetras_y_numeros)]],
@@ -101,14 +101,13 @@ export class ModalNewAgremiadoComponent {
       return;
     }
     console.log(this.Formulario_add_agremiado.value);
-    this.service.newAgremiado(this.Formulario_add_agremiado.value).subscribe((data: any) => {
-      this.service.setNewAgremiado(data);
-      this.Formulario_add_agremiado.reset();
+    this.agremiadoservice.newAgremiado(this.Formulario_add_agremiado.value).subscribe((data: any) => {
+      this.agremiadoservice.setNewAgremiado(data);
       this.alertService.generateAlert({
         title: 'Operación exitosa', text: 'Se ha registrado correctamente el usuario', icon: 'success', showConfirmButton: true
       }
       )
-
+      this.modalService.closeModalNewAgremiado();
     }, (error) => {
       this.alertService.generateAlert({
         title: 'Fallo en la operación', text: 'Ha ocurrido un error al registrar al usuario', icon: 'error', showConfirmButton: true
@@ -118,6 +117,6 @@ export class ModalNewAgremiadoComponent {
   }
 
   cerrarModal(){
-    this.modalService.closeModal();
+    this.modalService.closeModalNewAgremiado();
   }
 }

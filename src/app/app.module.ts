@@ -19,6 +19,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SolicitudesComponent } from './components/Administrador/solicitudes/solicitudes.component';
 import { AgremiadosArchivadosComponent } from './components/Administrador/agremiados-archivados/agremiados-archivados.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ModalEditAgremiadoComponent } from './components/Modals/modal-edit-agremiado/modal-edit-agremiado.component';
+import { HomePrincipalAgremiadoComponent } from './components/Components_home/home-principal-agremiado/home-principal-agremiado.component';
+import { ModalNewSolicitudComponent } from './components/Modals/modal-new-solicitud/modal-new-solicitud.component';
+
 
 
 
@@ -37,15 +41,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ModalNewAgremiadoComponent,
     SolicitudesComponent,
     AgremiadosArchivadosComponent,
-
-
+    ModalEditAgremiadoComponent,
+    HomePrincipalAgremiadoComponent,
+    ModalNewSolicitudComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
+    HttpClientModule,   
     NgbModule
     
   ],

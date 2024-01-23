@@ -1,0 +1,52 @@
+body {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 1%;
+}
+
+nav,
+a {
+    background-color: #002731;
+    color: #fff;
+
+}
+
+label,
+i {
+    cursor: pointer;
+    padding-inline: 3px;
+}
+
+
+.btn-formatos,
+.btn-convocatorias,
+.btn-convenios,
+.btn-login,
+.btn-solicitudes {
+    color: #fff;
+}
+
+.btn-formatos-seleccionado,
+.btn-convocatorias-seleccionado,
+.btn-convenios-seleccionado,
+.btn-login-seleccionado,
+.btn-solicitudes-seleccionado {
+    background-color: rgba(62, 79, 116, 0.534);
+    color: #fff;
+}
+
+.btn-formatos:hover,
+.btn-convocatorias:hover,
+.btn-convenios:hover,
+.btn-login:hover,
+.btn-solicitudes:hover {
+    border: 1px solid rgba(81, 103, 151, 0.808);
+}
+
+.btn-cerrar-sesion{
+    color: rgb(137, 243, 255);
+}
+.btn-cerrar-sesion:hover{
+    color: rgb(0, 229, 255);
+    background-color: rgba(62, 79, 116, 0.534);
+}

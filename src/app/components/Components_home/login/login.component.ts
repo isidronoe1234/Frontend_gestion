@@ -1,8 +1,8 @@
 import { Component, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ServicesService } from '../../../services/services.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { ServiceLoginService } from 'src/app/services/service-login.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent {
 
   constructor(
     private fb: FormBuilder,
-    private service: ServicesService,
+    private loginService: ServiceLoginService,
     private router: Router) { }
 
   Formulario_login: FormGroup = this.fb.group({
@@ -39,8 +39,8 @@ export class LoginComponent {
       this.Formulario_login.markAllAsTouched();
       return;
     }
-    this.service.login(this.Formulario_login.value).subscribe((data: any) => {
-      this.service.guardar_user(data);
+    this.loginService.login(this.Formulario_login.value).subscribe((data: any) => {
+      this.loginService.guardar_user(data);
       const rolUser = data.id_rol;
       Swal.fire({
         title: '¡Bienvenido!',
@@ -72,7 +72,6 @@ export class LoginComponent {
 
   @HostListener('window:beforeunload', ['$event'])
   unloadHandler(event: Event): void {
-    // Borrar los datos del usuario del localStorage antes de que la página se cierre
     localStorage.removeItem('user');
   }
 

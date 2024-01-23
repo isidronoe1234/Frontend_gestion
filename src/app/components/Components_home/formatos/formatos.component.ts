@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ServicesService } from 'src/app/services/services.service';
+import { ServiceSolicitudesService } from 'src/app/services/service-solicitudes.service';
 
 @Component({
   selector: 'app-formatos',
@@ -8,7 +8,7 @@ import { ServicesService } from 'src/app/services/services.service';
 })
 export class FormatosComponent {
 
-  constructor(private service:ServicesService){}
+  constructor(private service:ServiceSolicitudesService){}
 
 
   descargarSolicitud(ruta_archivo: string) {

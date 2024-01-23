@@ -1,0 +1,162 @@
+.titulo-principal {
+  font-size: 35px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+body {
+  background-color: transparent
+}
+
+.boton-ver,
+.boton-modificar {
+  margin-right: 5px;
+}
+.boton-ver:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.341);
+}
+
+.boton-modificar,
+.boton-eliminar {
+  background-color: rgb(148, 81, 129);
+  color: #fff;
+}
+
+.boton-modificar:hover,
+.boton-eliminar:hover {
+  background-color: rgb(138, 53, 114);
+}
+
+.boton-agregar:hover {
+  background-color: #ff4722;
+}
+
+
+.boton-agregar {
+  background-color: #ff6445;
+  color: #fff;
+
+}
+
+.div-btn-agregar {
+  margin-bottom: 1%;
+}
+
+.boton-salir {
+  background-color: #e03625;
+  color: #fff;
+}
+
+.boton-salir:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.341);
+}
+
+.opciones {
+  text-align: center;
+}
+
+.opciones-botones {
+  position: relative;
+  text-align: center;
+}
+
+.table-hove tbody tr:hover {
+  background-color: #dddddd;
+  cursor: pointer;
+}
+
+table thead {
+  background-color: #00557e;
+  color: #fff;
+}
+
+table tbody {
+  background-color: #fff;
+}
+
+
+.row {
+  margin-bottom: 10px;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.modal-header {
+  background-color: #679289;
+  color: white;
+}
+
+.input-cuota {
+  margin-top: 25px;
+}
+
+small {
+  color: red;
+}
+
+i {
+  margin-right: 3px;
+}
+
+.table-responsive {
+  padding: 4px;
+}
+
+
+
+.btn-group,
+.btn-group-vertical {
+  position: absolute !important;
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.loading-message {
+  font-size: 35px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+
+.lds-dual-ring {
+  position: relative;
+  display: inline-block;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 100px;
+  height: 100px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 10px solid #00557e;
+  border-color: #00557e transparent #00557e transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+table{
+  box-shadow: 1px 5px 8px rgba(0, 0, 0, 0.2);
+}
+
+

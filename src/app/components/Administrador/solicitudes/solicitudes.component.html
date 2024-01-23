@@ -1,1 +1,100 @@
-<p>solicitudes works!</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<header>
+
+    <div class="col-sm-12">
+        <div class="d-flex align-items-center justify-content-between">
+            <h4 class="titulo-principal">PANEL DE SOLICITUDES</h4>
+        </div>
+    </div>
+    <hr>
+</header>
+
+<div *ngIf="loading" class="loading-overlay">
+    <div class="loading-message">Cargando datos...</div>
+    <div class="lds-dual-ring"></div>
+</div>
+
+<body *ngIf="!loading">
+
+
+    <div class="filtro-busqueda">
+        <form [formGroup]="filtroForm" (ngSubmit)="filtrarPorFechas()">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="row">
+                        <label for="fechaInicio" class="col-sm-4 col-form-label text-right">Fecha de inicio:</label>
+                        <div class="col-sm-7">
+                            <input type="date" class="form-control" id="fechaInicio" formControlName="fechaInicio">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="row">
+                        <label for="fechaTermino" class="col-sm-5 col-form-label text-right">Fecha de termino:</label>
+                        <div class="col-sm-7">
+                            <input type="date" class="form-control" id="fechaTermino" formControlName="fechaFin">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <button type="submit" class="btn boton-filtrar">Aplicar filtro</button>
+                        </div>
+                        <div class="col-sm-5">
+                            <button *ngIf="filtrando" type="button" (click)="quitarFiltro()" class="btn btn-secondary">Remover filtro</button>
+                        </div>
+
+                       
+                      
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+
+
+    <div class="table-responsive">
+        <table id="table-data-solicitudes" class="table table-hove table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">NUE</th>
+                    <th scope="col">Nombre(s)</th>
+                    <th scope="col">Apeliidos</th>
+                    <th style="width: auto;">Fecha de solicitud</th>
+                    <th scope="col">Hora de solicitud</th>
+                    <th scope="col" class="opciones">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of solicitudes; let i=index ">
+                    <td scope="row" align="center">{{i+1}}</td>
+                    <td>{{item.NUE}}</td>
+                    <td>{{item.nombre}}</td>
+                    <td>{{item.a_paterno}} {{item.a_materno}}</td>
+                    <td>{{item.fecha_solicitud}}</td>
+                    <td>{{item.hora_solicitud}}</td>
+                    <td class="opciones-botones">
+                        <button (click)="descargarSolicitud(item.ruta_archivo)" title="Descargar archivo" type="button"
+                            class="btn btn-sm boton-modificar"><i class="fa-solid fa-download"></i> Descargar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>

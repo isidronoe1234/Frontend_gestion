@@ -1,3 +1,7 @@
-<div class="body" [ngClass]="getBodyClass()">
+<div *ngIf="showSidenav===true else contenidoAlternativo" class="body" [ngClass]="getBodyClass()">
     <router-outlet></router-outlet>
 </div>
+
+<ng-template #contenidoAlternativo>
+    <router-outlet></router-outlet>
+  </ng-template>

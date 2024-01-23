@@ -7,46 +7,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<nav class="navbar navbar-expand-lg justify-content-between">
+    <div class="container-fluid">
+        <a class="navbar-brand" (click)="seleccionarPestana('home')"><i class="fa-solid fa-house"></i>  <label> Home</label></a>
+        <button class="btn navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa-solid fa-bars" style="color: #ffffff;"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ">
+                <li class="nav-item">
+                    <button class="btn m-1" [class.btn-formatos]="pestanaSeleccionada !== 'formatos'"
+                        [class.btn-formatos-seleccionado]="pestanaSeleccionada === 'formatos'"
+                        (click)="seleccionarPestana('formatos'); cerrarMenu()">
+                        Formatos
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn m-1" [class.btn-convocatorias]="pestanaSeleccionada !== 'convocatorias'"
+                        [class.btn-convocatorias-seleccionado]="pestanaSeleccionada === 'convocatorias'"
+                        (click)="seleccionarPestana('convocatorias'); cerrarMenu()">
+                        Convocatorias
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn m-1" [class.btn-solicitudes]="pestanaSeleccionada !== 'solicitudes'"
+                        [class.btn-solicitudes-seleccionado]="pestanaSeleccionada === 'solicitudes'"
+                        (click)="seleccionarPestana('solicitudes'); cerrarMenu()">
+                        Mis solicitudes
+                    </button>
+                </li>
+                <li class="nav-item ml-auto">
+                    <button class="btn m-1 btn-cerrar-sesion" [class.btn-convenios]="pestanaSeleccionada !== 'convenios'"
+                        [class.btn-convenios-seleccionado]="pestanaSeleccionada === 'convenios'"
+                        (click)="cerrarSesion(); cerrarMenu()">
+                        <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 
 <body>
-    <h1>Bienvenido Usuario</h1>
 
-    <div class="table-responsive">
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Fecha de solicitud</th>
-                    <th scope="col">Opciones</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of solicitudes; let i = index">
-                    <th scope="row">{{i+1}}</th>
-                    <td>{{item.created_at}}</td>
-                    <td>
-                        <button class="btn btn-danger" (click)="descargarSolicitud(item.ruta_archivo)">
-                            Descargar
-                        </button>
-                    </td>
-                    
-                  
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <form [formGroup]="Form_solicitud" (ngSubmit)="guardar()">
-        <div class="mb-3">
-            <label for="file" class="form-label">Archivo</label>
-            <input type="file" class="form-control" id="file" (change)="onFileSelected($event)"
-                accept=".pdf, .doc, .docx, .jpg, .png, .jpeg">
+    <div class="tabs" style="margin-top: 1%;">
+        <div *ngIf="pestanaSeleccionada === 'formatos'">
+            <app-formatos></app-formatos>
+        </div>
+        <div *ngIf="pestanaSeleccionada === 'convocatorias'">
+            <app-convocatorias></app-convocatorias>
+        </div>
+        <div *ngIf="pestanaSeleccionada === 'convenios'">
+            <app-convenios></app-convenios>
+        </div>
+        <div *ngIf="pestanaSeleccionada === 'home'">
+            <app-home-principal-agremiado></app-home-principal-agremiado>
         </div>
 
-        <button type="submit" class="btn btn-primary">Guardar</button>
-    </form>
-
+        <div *ngIf="pestanaSeleccionada === 'solicitudes'">
+            <app-home-principal-agremiado></app-home-principal-agremiado>
+        </div>
+    </div>
 </body>
 
 </html>

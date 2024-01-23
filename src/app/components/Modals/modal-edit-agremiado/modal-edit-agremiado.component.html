@@ -1,0 +1,157 @@
+<!-- modal-new-agremiado.component.html -->
+<div class="modal-header">
+    <h4 class="modal-title">EDITAR AGREMIADO</h4>
+    <button (click)="cerrarModal()" style="background-color: white;" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<form [formGroup]="Formulario_edit_agremiado" (ngSubmit)="edit_agremiado()">
+    <div class="modal-body modal-lg">
+        <div class="row">
+            <div class="col-4">
+                <label class="form-label">Nombre(s)</label>
+                <input type="text" class="form-control" formControlName="nombre" 
+                    aria-label="First name">
+                <div *ngFor="let validacion of Mensajes_validaciones.nombre">
+                    <small
+                        *ngIf="Formulario_edit_agremiado.get('nombre')?.hasError(validacion.type) && (Formulario_edit_agremiado.get('nombre')?.dirty || Formulario_edit_agremiado.get('nombre')?.touched)">
+                        <i class="fa fa-circle-exclamation"></i>{{validacion.message}}
+                    </small>
+                </div>
+            </div>
+            <div class="col-4">
+                <label class="form-label">Apellido paterno</label>
+                <input type="text" class="form-control" formControlName="a_paterno"
+                    aria-label="Last name">
+                <div *ngFor="let validacion of Mensajes_validaciones.a_paterno">
+                    <small
+                        *ngIf="Formulario_edit_agremiado.get('a_paterno')?.hasError(validacion.type) && (Formulario_edit_agremiado.get('a_paterno')?.dirty || Formulario_edit_agremiado.get('a_paterno')?.touched)">
+                        <i class="fa fa-circle-exclamation"></i>{{validacion.message}}
+                    </small>
+                </div>
+            </div>
+            <div class="col-4">
+                <label class="form-label">Apellido materno</label>
+                <input type="text" class="form-control" formControlName="a_materno" placeholder="Last name"
+                    aria-label="Last name">
+                <div *ngFor="let validacion of Mensajes_validaciones.a_materno">
+                    <small
+                        *ngIf="Formulario_edit_agremiado.get('a_materno')?.hasError(validacion.type) && (Formulario_edit_agremiado.get('a_materno')?.dirty || Formulario_edit_agremiado.get('a_materno')?.touched)">
+                        <i class="fa fa-circle-exclamation"></i>{{validacion.message}}
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <label class="form-label">Genero</label>
+                <select class="form-select" aria-label="Default select example" formControlName="sexo">
+                    <option value="">Seleccionar</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Otro">Otro</option>
+                    <option value="Prefiero no decirlo">Prefiero no decirlo</option>
+                </select>
+                <div *ngFor="let validacion of Mensajes_validaciones.sexo">
+                    <small
+                        *ngIf="Formulario_edit_agremiado.get('sexo')?.hasError(validacion.type) && (Formulario_edit_agremiado.get('sexo')?.dirty || Formulario_edit_agremiado.get('sexo')?.touched)">
+                        <i class="fa fa-circle-exclamation"></i>{{validacion.message}}
+                    </small>
+                </div>
+            </div>
+            <div class="col-4">
+                <label class="form-label">Teléfono</label>
+                <input type="text" class="form-control" formControlName="telefono" 
+                    aria-label="Last name">
+                <div *ngFor="let validacion of Mensajes_validaciones.telefono">
+                    <small
+                        *ngIf="Formulario_edit_agremiado.get('telefono')?.hasError(validacion.type) && (Formulario_edit_agremiado.get('telefono')?.dirty || Formulario_edit_agremiado.get('telefono')?.touched)">
+                        <i class="fa fa-circle-exclamation"></i>{{validacion.message}}
+                    </small>
+                </div>
+            </div>
+            <div class="col-4">
+                <label class="form-label">Fecha de nacimiento</label>
+                <input type="date" class="form-control" formControlName="f_nacimiento"
+                    placeholder="Last name" aria-label="Last name">
+                <div *ngFor="let validacion of Mensajes_validaciones.f_nacimiento">
+                    <small
+                        *ngIf="Formulario_edit_agremiado.get('f_nacimiento')?.hasError(validacion.type) && (Formulario_edit_agremiado.get('f_nacimiento')?.dirty || Formulario_edit_agremiado.get('f_nacimiento')?.touched)">
+                        <i class="fa fa-circle-exclamation"></i>{{validacion.message}}
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <label class="form-label">NUE</label>
+                <input type="text" class="form-control" formControlName="NUE" placeholder="Número Unico de Empleado"
+                    aria-label="First name">
+                <div *ngFor="let validacion of Mensajes_validaciones.NUE">
+                    <small
+                        *ngIf="Formulario_edit_agremiado.get('NUE')?.hasError(validacion.type) && (Formulario_edit_agremiado.get('NUE')?.dirty || Formulario_edit_agremiado.get('NUE')?.touched)">
+                        <i class="fa fa-circle-exclamation"></i>{{validacion.message}}
+                    </small>
+                </div>
+            </div>
+            <div class="col-4">
+                <label class="form-label">NUP</label>
+                <input type="text" class="form-control" formControlName="NUP" placeholder="Número Unico Público"
+                    aria-label="Last name">
+                <div *ngFor="let validacion of Mensajes_validaciones.NUP">
+                    <small
+                        *ngIf="Formulario_edit_agremiado.get('NUP')?.hasError(validacion.type) && (Formulario_edit_agremiado.get('NUP')?.dirty || Formulario_edit_agremiado.get('NUP')?.touched)">
+                        <i class="fa fa-circle-exclamation"></i>{{validacion.message}}
+                    </small>
+                </div>
+            </div>
+            <div class="col-4">
+                <label class="form-label">NSS</label>
+                <input type="text" class="form-control" formControlName="NSS" placeholder="Número de Seguro Social"
+                    aria-label="Last name">
+                <div *ngFor="let validacion of Mensajes_validaciones.NSS">
+                    <small
+                        *ngIf="Formulario_edit_agremiado.get('NSS')?.hasError(validacion.type) && (Formulario_edit_agremiado.get('NSS')?.dirty || Formulario_edit_agremiado.get('NSS')?.touched)">
+                        <i class="fa fa-circle-exclamation"></i>{{validacion.message}}
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label class="form-label">RFC</label>
+                <input type="text" class="form-control" formControlName="RFC" placeholder=""
+                    aria-label="First name">
+                <div *ngFor="let validacion of Mensajes_validaciones.RFC">
+                    <small
+                        *ngIf="Formulario_edit_agremiado.get('RFC')?.hasError(validacion.type) && (Formulario_edit_agremiado.get('RFC')?.dirty || Formulario_edit_agremiado.get('RFC')?.touched)">
+                        <i class="fa fa-circle-exclamation"></i>{{validacion.message}}
+                    </small>
+                </div>
+            </div>
+            <div class="col-6">
+                <label class="form-label">¿Paga cuota?</label>
+                <div class="">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="inlineRadio1" [value]="1"
+                            formControlName="cuota">
+                        <label class="form-check-label" for="inlineRadio1">Sí</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="inlineRadio2" [value]="0"
+                            formControlName="cuota">
+                        <label class="form-check-label" for="inlineRadio2">No</label>
+                    </div>
+                    <div *ngFor="let validacion of Mensajes_validaciones.cuota">
+                        <small *ngIf="Formulario_edit_agremiado.get('cuota')?.hasError(validacion.type) && 
+                            (Formulario_edit_agremiado.get('cuota')?.dirty || 
+                            Formulario_edit_agremiado.get('cuota')?.touched)">
+                            <i class="fa fa-circle-exclamation"></i>{{validacion.message}}
+                        </small>
+                    </div>
+                </div>
+            </div>         
+        </div>
+    </div>
+    <div class="modal-footer justify-content-center">
+        <button type="submit" class="btn btn-secondary " style="width: 200px; color: white;">Modificar</button>
+    </div>
+</form>

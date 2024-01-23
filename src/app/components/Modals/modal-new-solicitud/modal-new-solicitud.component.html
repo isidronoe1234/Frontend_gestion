@@ -1,0 +1,22 @@
+<!-- modal-new-agremiado.component.html -->
+<div class="modal-header">
+    <h4 class="modal-title">Nueva Solicitud</h4>
+    <button (click)="cerrarModal()" style="background-color: white;" type="button" class="btn-close"
+        data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<form [formGroup]="Form_solicitud" (ngSubmit)="guardar()">
+    <div class="modal-body modal-lg">
+        <div class="row">
+            <div class="col">
+
+                <label for="file" class="form-label">Archivo</label>
+                <input type="file" class="form-control" id="file" (change)="onFileSelected($event)"
+                    accept=".pdf, .doc, .docx, .jpg, .png, .jpeg">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer justify-content-center">
+        <button type="submit" class="btn btn-secondary " style="width: 200px; color: white;">Enviar</button>
+    </div>
+</form>
