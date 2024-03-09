@@ -30,7 +30,6 @@ export class AgremiadosComponent {
       }
     });
 
-
     this.agremiadoservice.editarAgremiado.subscribe(agremiado => {
       console.log(agremiado);
       if (agremiado) {
